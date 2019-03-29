@@ -6,6 +6,7 @@
 </head>
 <body>
 	<script type="text/javascript">
+		// create the grid
 		const wrapper = document.createElement('div');
 		wrapper.classList.add('wrapper');
 
@@ -18,7 +19,17 @@
 			gridCell.classList.add('item');
 			wrapper.appendChild(gridCell)
 		}
-		
+
+		// Add event
+
+		let allCells = Array.from(document.querySelectorAll('div.item'));
+		allCells.forEach(function(cell){
+			cell.addEventListener('mouseover', () => {
+				cell.classList.add('cellColor');
+			})
+		})
+
+
 	</script>
 </body>
 </html>

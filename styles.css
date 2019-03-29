@@ -67,5 +67,9 @@ a img {
 }
 
 .item {
-	border: 1px solid rgb(255,0,0);
+	border: 1px solid black;
+}
+
+.cellColor {
+	background-color: #f00;
 }
