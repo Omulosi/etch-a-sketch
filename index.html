@@ -7,27 +7,123 @@
 <body>
 	<script type="text/javascript">
 		// create the grid
-		const wrapper = document.createElement('div');
-		wrapper.classList.add('wrapper');
+		let SQUARE_SIZE;
 
 		const body = document.querySelector('body');
 		body.classList.add('container');
-		body.appendChild(wrapper);
 
-		for (let i = 0; i <= 256; i++){
-			let gridCell = document.createElement('div');
-			gridCell.classList.add('item');
-			wrapper.appendChild(gridCell)
+		const header = document.createElement('div');
+		header.innerHTML = '<h1>Etch-A-Sketch</h1>';
+
+		body.appendChild(header);
+
+		const mainContent = document.createElement('div');
+		mainContent.classList.add('main');
+		body.appendChild(mainContent);
+
+		const sidePanel = document.createElement('div');
+		sidePanel.classList.add('side-panel');
+		mainContent.appendChild(sidePanel);
+
+		const resetButton = document.createElement('button');
+		resetButton.textContent = 'Reset';
+		resetButton.classList.add('btn');
+
+		resetButton.addEventListener('click', ()=> {
+			SQUARE_SIZE = Number(prompt('How many squares per side?'));
+			if (SQUARE_SIZE) {
+				clearGrid();
+				// create new grid
+				createGrid(SQUARE_SIZE);
+			}
+			
+		});
+
+		sidePanel.appendChild(resetButton);
+
+		const clearButton = document.createElement('button');
+		clearButton.textContent = 'Clear';
+		clearButton.classList.add('btn');
+
+		clearButton.addEventListener('click', ()=> {
+			clearGrid();
+			// create new grid
+			createGrid(SQUARE_SIZE);
+		});
+
+		sidePanel.appendChild(clearButton);
+
+		const eraseButton = document.createElement('button');
+		eraseButton.textContent = 'Erase';
+		eraseButton.classList.add('btn');
+
+		eraseButton.addEventListener('click', ()=> {
+			let allCells = Array.from(document.querySelectorAll('div.item'));
+
+			allCells.forEach(function(cell){
+				cell.addEventListener('mouseover', () => {
+					cell.classList.remove('cellColor');
+				})
+			});
+		});
+
+		sidePanel.appendChild(eraseButton);
+
+		const randomButton = document.createElement('button');
+		randomButton.textContent = 'Colored';
+		randomButton.classList.add('btn');
+
+		randomButton.addEventListener('click', ()=> {
+			let allCells = Array.from(document.querySelectorAll('div.item'));
+			let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+
+			allCells.forEach(function(cell){
+				cell.addEventListener('mouseover', () => {
+					let color = colors[Math.floor(Math.random() * colors.length)];
+					cell.setAttribute('style', `background-color:${color}`);
+				})
+			});
+		});
+
+		sidePanel.appendChild(randomButton);
+
+		function createGrid(square_size){
+			const wrapper = document.createElement('div');
+			wrapper.classList.add('wrapper');
+			wrapper.setAttribute('style', `display:grid; 
+								  grid-template-rows: repeat(${square_size}, 1fr);
+								  grid-template-columns: repeat(${square_size}, 1fr)`);
+
+			numberOfCells = square_size * square_size;
+			for (let i = 0; i <= numberOfCells; i++){
+				let gridCell = document.createElement('div');
+				gridCell.classList.add('item');
+				wrapper.appendChild(gridCell);
+			}
+
+			mainContent.appendChild(wrapper);
+
+			// Add Events
+
+			let allCells = Array.from(document.querySelectorAll('div.item'));
+
+			allCells.forEach(function(cell){
+				cell.addEventListener('mouseover', () => {
+					cell.setAttribute('style','background-color: red');
+				})
+			});
 		}
 
-		// Add event
+		function clearGrid(){
+			// delete all cells
+			let wrapper = document.querySelector(".wrapper");
+			while (wrapper.firstChild){
+				wrapper.removeChild(wrapper.firstChild);
+			}
+			wrapper.remove() // remove wrapper elem from children list of parent
+		}
 
-		let allCells = Array.from(document.querySelectorAll('div.item'));
-		allCells.forEach(function(cell){
-			cell.addEventListener('mouseover', () => {
-				cell.classList.add('cellColor');
-			})
-		})
+		createGrid(SQUARE_SIZE=16);
 
 
 	</script>

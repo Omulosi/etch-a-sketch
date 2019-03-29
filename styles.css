@@ -46,8 +46,18 @@ a img {
 }
 /* END RESET*/
 
-* {
+/* GLOBAL STYLES */
+
+*, *:before, *:after {
 	box-sizing: border-box;
+}
+
+h1 {
+	font-size: 1.5em;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 0.5em;
 }
 
 .container {
@@ -56,20 +66,44 @@ a img {
 	position: relative;
 }
 
+.main {
+	display: flex;
+	margin-top: 1em;
+}
+
+.side-panel {
+	flex-basis: 20%;
+	margin-left: 2em;
+}
+
 .wrapper {
-	display: grid;
 	width: 500px;
 	height: 500px;
-	grid-template-columns: repeat(16, 1fr);
-	grid-template-rows: repeat(16, 1fr);
-	position: absolute;
-	left: 25%;
+	padding: 5px;
+	background-color: #000;
 }
 
 .item {
-	border: 1px solid black;
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	background-color: rgb(255, 255, 255);
 }
 
 .cellColor {
 	background-color: #f00;
+}
+
+/* BUTTONS */
+
+.btn {
+	font-size: 0.9em;
+	padding: 0.3em 1.4em;
+	margin-bottom: 1em;
+	display: block;
+	background: transparent;
+	background-color: #eee;
+}
+
+select {
+    font-size: .9rem;
+    padding: 2px 5px;
 }
