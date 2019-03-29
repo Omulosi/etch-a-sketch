@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ETCH-A-SKETCH</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<script type="text/javascript">
+		const wrapper = document.createElement('div');
+		wrapper.classList.add('wrapper');
+
+		const body = document.querySelector('body');
+		body.classList.add('container');
+		body.appendChild(wrapper);
+
+		for (let i = 0; i <= 256; i++){
+			let gridCell = document.createElement('div');
+			gridCell.classList.add('item');
+			wrapper.appendChild(gridCell)
+		}
+		
+	</script>
+</body>
+</html>
