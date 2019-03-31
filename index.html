@@ -25,22 +25,21 @@
 		sidePanel.classList.add('side-panel');
 		mainContent.appendChild(sidePanel);
 
+		// Add a Reset Button
 		const resetButton = document.createElement('button');
 		resetButton.textContent = 'Reset';
 		resetButton.classList.add('btn');
 
 		resetButton.addEventListener('click', ()=> {
-			SQUARE_SIZE = Number(prompt('How many squares per side?'));
-			if (SQUARE_SIZE) {
-				clearGrid();
-				// create new grid
-				createGrid(SQUARE_SIZE);
-			}
-			
+			SQUARE_SIZE = Number(prompt('How many squares per side?')) || SQUARE_SIZE;
+			clearGrid();
+			// create new grid
+			createGrid(SQUARE_SIZE);
 		});
 
 		sidePanel.appendChild(resetButton);
 
+		// Add a clear button
 		const clearButton = document.createElement('button');
 		clearButton.textContent = 'Clear';
 		clearButton.classList.add('btn');
@@ -53,6 +52,7 @@
 
 		sidePanel.appendChild(clearButton);
 
+		// Add an Erase Button
 		const eraseButton = document.createElement('button');
 		eraseButton.textContent = 'Erase';
 		eraseButton.classList.add('btn');
@@ -62,13 +62,14 @@
 
 			allCells.forEach(function(cell){
 				cell.addEventListener('mouseover', () => {
-					cell.classList.remove('cellColor');
+					cell.removeAttribute('style');
 				})
 			});
 		});
 
 		sidePanel.appendChild(eraseButton);
 
+		// Add a Button for sketcjing with random colors
 		const randomButton = document.createElement('button');
 		randomButton.textContent = 'Colored';
 		randomButton.classList.add('btn');
@@ -109,7 +110,7 @@
 
 			allCells.forEach(function(cell){
 				cell.addEventListener('mouseover', () => {
-					cell.setAttribute('style','background-color: red');
+					cell.setAttribute('style', 'background-color: red');
 				})
 			});
 		}
